@@ -25,11 +25,12 @@ class ArticleController
         $query = 'SELECT * FROM `articles`';
         $databaseManager->connection->query($query);
         $rawArticles = $databaseManager->connection->query($query);
+        
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
             // We are converting an article from a "dumb" array to a much more flexible class
-            $articles[] = new Article($rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
+            $articles[] = new Article($rawArticle['id'],$rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
         }
         return $articles;
     }
