@@ -3,9 +3,9 @@
 <?php // Use any data loaded in the controller here ?>
 
 <section>
-    <h1><?= $article->title ?></h1>
-    <p><?= $article->formatPublishDate() ?></p>
-    <p><?= $article->description ?></p>
+    <h1><?= $books->title ?></h1>
+    <p><?= $books->description ?></p>
+    <p><?= $books->publishDate ?></p>
 
     <?php // TODO: links to next and previous ?>
     <a href="#">Previous article</a>

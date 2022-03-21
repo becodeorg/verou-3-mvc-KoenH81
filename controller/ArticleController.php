@@ -32,11 +32,28 @@ class ArticleController
             // We are converting an article from a "dumb" array to a much more flexible class
             $articles[] = new Article($rawArticle['id'],$rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
         }
+        var_dump($articles);
         return $articles;
     }
 
     public function show()
     {
         // TODO: this can be used for a detail page
+        $databaseManager = new DatabaseManager('localhost', 'root', '', 'mvc');
+        $databaseManager->connect();
+        $bookDetail = [];
+        $bookId = $_GET['book_id'];
+        $query = "SELECT * FROM `articles` WHERE id = '{$bookId}'";
+        $databaseManager->connection->query($query);
+        $bookDetail = $databaseManager->connection->query($query);
+        //var_dump($bookDetail);
+        $books = [];
+        foreach ($bookDetail as $bookD) {
+            // We are converting an article from a "dumb" array to a much more flexible class
+            $books[] = new Book($bookD['id'],$bookD['title'], $bookD['description'], $bookD['publish_date']);
+        };
+        var_dump($books);
+        require 'view/articles/show.php';
+        return $books;
     }
 }

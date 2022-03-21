@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 
 //include all your model files here
 require 'Model/Article.php';
+require_once 'Model/Book.php';
 //include all your controllers here
 require 'Controller/HomepageController.php';
 require 'Controller/ArticleController.php';
