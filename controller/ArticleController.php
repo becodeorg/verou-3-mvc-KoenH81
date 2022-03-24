@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 class ArticleController
 {
@@ -18,19 +18,19 @@ class ArticleController
     {
         // TODO: prepare the database connection
         $databaseManager = new DatabaseManager('localhost', 'root', '', 'mvc');
-        $databaseManager->connect();   
+        $databaseManager->connect();
         // Note: you might want to use a re-usable databaseManager class - the choice is yours
         // TODO: fetch all articles as $rawArticles (as a simple array)
         $rawArticles = [];
         $query = 'SELECT * FROM `articles`';
         $databaseManager->connection->query($query);
         $rawArticles = $databaseManager->connection->query($query);
-        
+
 
         $articles = [];
         foreach ($rawArticles as $rawArticle) {
             // We are converting an article from a "dumb" array to a much more flexible class
-            $articles[] = new Article($rawArticle['id'],$rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
+            $articles[] = new Article($rawArticle['id'], $rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
         }
         var_dump($articles);
         return $articles;
@@ -50,10 +50,19 @@ class ArticleController
         $books = [];
         foreach ($bookDetail as $bookD) {
             // We are converting an article from a "dumb" array to a much more flexible class
-            $books[] = new Book($bookD['id'],$bookD['title'], $bookD['description'], $bookD['publish_date']);
+            $books[] = new Book($bookD['id'], $bookD['title'], $bookD['description'], $bookD['publish_date']);
         };
-        var_dump($books);
         require 'view/articles/show.php';
-        return $books;
+        function previous()
+        {
+            $previousBookId = $_GET['book_id'] - 1;
+            var_dump($previousBookId);
+        };
+        function next()
+        {
+            $nextBookId = $_GET['book_id'] + 1;
+            var_dump($nextBookId);
+        }
+        previous();
     }
 }
