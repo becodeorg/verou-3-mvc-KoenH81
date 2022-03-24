@@ -32,7 +32,6 @@ class ArticleController
             // We are converting an article from a "dumb" array to a much more flexible class
             $articles[] = new Article($rawArticle['id'], $rawArticle['title'], $rawArticle['description'], $rawArticle['publish_date']);
         }
-        var_dump($articles);
         return $articles;
     }
 
@@ -52,17 +51,25 @@ class ArticleController
             // We are converting an article from a "dumb" array to a much more flexible class
             $books[] = new Book($bookD['id'], $bookD['title'], $bookD['description'], $bookD['publish_date']);
         };
+        $previousB = $this->previousB();
+        $nextB = $this->nextB();
+
         require 'view/articles/show.php';
-        function previous()
-        {
-            $previousBookId = $_GET['book_id'] - 1;
-            var_dump($previousBookId);
-        };
-        function next()
-        {
-            $nextBookId = $_GET['book_id'] + 1;
-            var_dump($nextBookId);
+    }
+    public function previousB()
+    {
+        $previousBookId = $_GET['book_id'] - 1;
+        if ($previousBookId < 1) {
+            $previousBookId = $_GET['book_id'];
         }
-        previous();
+        return $previousBookId;
+    }
+    public function nextB()
+    {
+        $nextBookId = $_GET['book_id'] + 1;
+        if ($nextBookId > 3) {
+            $nextBookId = $_GET['book_id'];
+        }
+        return $nextBookId;
     }
 }

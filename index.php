@@ -30,6 +30,8 @@ switch ($page) {
     case 'articles-show':
         // TODO: detail page
         (new ArticleController())->show();
+        //(new ArticleController())->previousB();
+        //(new ArticleController())->nextB();
         break;
     case 'home':
     default:
